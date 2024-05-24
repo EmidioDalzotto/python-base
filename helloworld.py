@@ -21,11 +21,20 @@ import sys
 
 arguments = {
     "lang": None,
-    "count": None,
+    "count": 1,
 }
 for arg in sys.argv[1:]:
     # TODO: TRATAR ValueError
-    key, value = arg.split("=")
+    try:
+        key, value = arg.split("=")
+    except ValueError as e:
+        print(f"[ERROR] {str(e)}")
+        print("You nedd to use `=`")
+        print(f"You passed {arg}")
+        print(f"try with --key=value")
+        sys.exit(1)
+
+
     key = key.lstrip("-").strip()
     value = value.strip()
     if key not in arguments:
@@ -34,6 +43,7 @@ for arg in sys.argv[1:]:
     arguments[key] = value
 
 current_language = arguments["lang"]
+print(f"{current_language=}")
 if current_language is None:
     # TODO: Usar Repetição
     if "LANG" in os.environ: 
@@ -51,6 +61,20 @@ msg = {
     "es_SP": "Hola, Mundo!",
     "fr_FR": "Bonjour, Monde!",
 }
+
+"""
+#try com valor default
+message = msg.get(current_language, msg["en_US"])
+"""
+
+#EAFP
+try:
+    message = msg[current_language]
+except KeyError as e:
+    print(f"[ERROR] {str(e)}")
+    print(f"Language is invalid, choose from: {list(msg.keys())}")
+    sys.exit(1)
+
 
 print (
     msg[current_language] * int(arguments["count"])
