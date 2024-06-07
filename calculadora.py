@@ -30,8 +30,18 @@ __version__ = "0.1.0"
 
 import os
 import sys
+import logging
 
 from datetime import datetime
+
+#configuração do logging
+log_filepath = os.path.join(os.curdir, "infixcalc.log")
+logging.basicConfig(
+    filename = log_filepath,
+    level = logging.DEBUG,
+    format = '%(asctime)s - %(user)s - %(levelname)s - %(message)s'
+)
+
 
 arguments = sys.argv[1:]
 
@@ -97,7 +107,7 @@ try:
     with open(filepath, "a") as file_:
         file_.write(f"{timestamp} - {user} - {operation}, {n1}, {n2} = {result}\n")
 except PermissionError as e:
-    #TODO: logging
+    logging.error("Erro ao desempacotar números", exc_info = True, extra = {'user': os.getenv('USER', 'anonymous')})
     print(str(e))
     sys.exit(1)
 
