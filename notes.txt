@@ -1,4 +1,11 @@
 Minha primeira Nota
 	geral	minha nota 1
 Minha segunda Nota
-	tech	python é legal
+	tech	python legal
+Minha outra nota	
+	teste	Golanguagepython
+Teste	
+	python	While e for para repetir
+Trembolona	Anabol	Faz mal pra saude
+Geral	geral	textos
+Faz Mal Pra Saude	Faz mal pra saude	Anabol
