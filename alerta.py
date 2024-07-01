@@ -32,6 +32,8 @@ except ValueError:
 
 if temperatura > 45:
     print("ALERTA!!! Perigo, calor extremo \U0001F975")
+elif temperatura == 0 and umidade == 0:
+    print("Tá frio! \U0001F914")
 elif temperatura * 3 >= umidade:
     print("ALERTA !!! Perigo de calor úmido")
 elif temperatura >= 10 and temperatura <= 30:
